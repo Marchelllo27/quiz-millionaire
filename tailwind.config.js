@@ -13,10 +13,6 @@ export default {
         bounce: "bounceAnimation 1s linear 5 alternate",
       },
       keyframes: {
-        // bounce: {
-        //   "0%, 100%": { transform: "translateY(0)" },
-        //   "50%": { transform: "translateY(-25%)" },
-        // },
         bounceAnimation: {
           "0%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-25%)" },

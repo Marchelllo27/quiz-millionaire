@@ -1,17 +1,15 @@
 import { useEffect, useState } from "react";
 
+import { delay } from "../helpers/helpers";
 import Counter from "./Counter";
 import PropTypes from "prop-types";
 
 const GameSection = ({ data, questionNumber, setQuestionNumber }) => {
   const [question, setQuestion] = useState(null);
-
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [adjustedAnswerStyle, setAdjustedAnswerStyle] = useState("");
-
-  const delay = (action, duration) => {
-    setTimeout(action, duration);
-  };
+  const [stopCounter, setStopCounter] = useState(null);
+  const [resetCounter, setResetCounter] = useState(null);
 
   useEffect(() => {
     setQuestion(data[questionNumber - 1]);
@@ -19,7 +17,7 @@ const GameSection = ({ data, questionNumber, setQuestionNumber }) => {
 
   const onClickHandler = answer => {
     setSelectedAnswer(answer);
-
+    setStopCounter(true);
     delay(() => {
       if (answer.correct) {
         setAdjustedAnswerStyle("from-[green] to-[green]");
@@ -27,6 +25,8 @@ const GameSection = ({ data, questionNumber, setQuestionNumber }) => {
           setQuestionNumber(prev => prev + 1);
           setSelectedAnswer(null);
           setAdjustedAnswerStyle(null);
+          setStopCounter(false);
+          setResetCounter(true);
         }, 2000);
       } else {
         setAdjustedAnswerStyle("from-[red] to-[red]");
@@ -36,7 +36,7 @@ const GameSection = ({ data, questionNumber, setQuestionNumber }) => {
 
   return (
     <section className="w-3/4 bg-hero-pattern bg-center text-white">
-      <Counter />
+      <Counter stopCounter={stopCounter} resetCounter={resetCounter} />
       <div className="bottom h-2/4 px-20 flex flex-col items-center justify-center text-center">
         <h2 className="question mb-10 text-2xl border-2 rounded-md w-full py-4 bg-gradient-to-b from-[#100241] to-[black]">
           {question && question.question}
