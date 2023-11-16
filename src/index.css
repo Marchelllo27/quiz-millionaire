@@ -23,3 +23,13 @@ img {
   max-width: 100%;
   /* object-fit: cover; */
 }
+
+#username {
+  background-color: rgb(2, 2, 48, 0.8);
+  outline: none;
+  border: 1px solid white;
+  padding: 0.6rem 0.5rem;
+  border-radius: 5px;
+  color: white;
+  font-size: 1.2rem;
+}
