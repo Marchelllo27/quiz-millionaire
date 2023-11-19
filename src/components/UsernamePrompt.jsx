@@ -1,11 +1,22 @@
+import { useContext } from "react";
 import PropTypes from "prop-types";
+
+import { GameContext } from "../store/GameContextProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 const UsernamePrompt = ({ setGameIsStarted }) => {
+  const { changeUsername } = useContext(GameContext);
+
   const onSubmitHandler = e => {
     e.preventDefault();
-    setGameIsStarted(true);
+
+    const value = e.target.username.value;
+
+    if (value && value !== "") {
+      changeUsername(value);
+      setGameIsStarted(true);
+    }
   };
 
   return (

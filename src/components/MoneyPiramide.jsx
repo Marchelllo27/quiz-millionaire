@@ -1,3 +1,4 @@
+
 import PropTypes from "prop-types";
 
 const moneyPyramid = [
@@ -18,9 +19,17 @@ const moneyPyramid = [
   { id: 15, amount: "1000000" },
 ].reverse();
 
+import { useContext } from "react";
+import { GameContext } from "../store/GameContextProvider";
+
 const MoneyPiramide = ({ questionNumber }) => {
+  const { isAdmin, username } = useContext(GameContext);
+
+  const name = isAdmin ? "Admin" : username;
+
   return (
     <aside className="w-1/4 bg-main-blue text-white flex justify-center items-center">
+      {name && <p className="absolute top-4">{name}</p>}
       <ul className="w-full p-6">
         {moneyPyramid.map(item => (
           <li key={item.id} className={`flex p-0.5 rounded ${questionNumber === item.id ? "bg-[#008080]" : ""}`}>
