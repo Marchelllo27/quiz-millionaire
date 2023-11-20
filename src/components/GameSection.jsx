@@ -1,12 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
-import Counter from "./Counter";
+import TopSection from "./TopSection";
 import PropTypes from "prop-types";
 import Question from "./Question";
 import Answers from "./Answers";
 import UsernamePrompt from "./UsernamePrompt";
+import Modal from "./Modal";
+import { GameContext } from "../store/GameContextProvider";
 
 const GameSection = ({ data, questionNumber, setQuestionNumber }) => {
+  const { showModal } = useContext(GameContext);
+
   const [gameIsStarted, setGameIsStarted] = useState(false);
   const [question, setQuestion] = useState(null);
   const [stopCounter, setStopCounter] = useState(null);
@@ -19,7 +23,7 @@ const GameSection = ({ data, questionNumber, setQuestionNumber }) => {
   return (
     <section className="w-3/4 bg-hero-pattern bg-center bg-cover text-white relative">
       {!gameIsStarted && <UsernamePrompt setGameIsStarted={setGameIsStarted} />}
-      {gameIsStarted && <Counter stopCounter={stopCounter} resetCounter={resetCounter} />}
+      {gameIsStarted && <TopSection stopCounter={stopCounter} resetCounter={resetCounter} />}
       {gameIsStarted && (
         <div className="bottom h-2/4 px-20 flex flex-col items-center justify-center text-center">
           <Question question={question?.question} />
@@ -32,6 +36,7 @@ const GameSection = ({ data, questionNumber, setQuestionNumber }) => {
           />
         </div>
       )}
+      {showModal && <Modal />}
     </section>
   );
 };

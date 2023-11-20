@@ -6,12 +6,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 const UsernamePrompt = ({ setGameIsStarted }) => {
-  const { changeUsername } = useContext(GameContext);
+  const { changeUsername, toggleIsAdmin, isAdmin } = useContext(GameContext);
 
   const onSubmitHandler = e => {
     e.preventDefault();
 
     const value = e.target.username.value;
+
+    if (value.toLowerCase() === "admin") {
+      toggleIsAdmin();
+    }
 
     if (value && value !== "") {
       changeUsername(value);

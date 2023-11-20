@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import PropTypes from "prop-types";
 
 import { delay } from "../helpers/helpers";
+import { GameContext } from "../store/GameContextProvider";
 
 const Answers = ({ answers, setStopCounter, setQuestionNumber, setResetCounter }) => {
+  const { setShowModal } = useContext(GameContext);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [adjustedAnswerStyle, setAdjustedAnswerStyle] = useState("");
 
@@ -22,12 +24,15 @@ const Answers = ({ answers, setStopCounter, setQuestionNumber, setResetCounter }
         }, 2000);
       } else {
         setAdjustedAnswerStyle("from-[red] to-[red]");
+        delay(() => {
+          setShowModal();
+        }, 3000);
       }
     }, 5000);
   };
 
   return (
-    <div className="answers flex flex-wrap gap-[2%] text-lg w-full justify-center">
+    <div className="answers flex flex-wrap gap-[2%] text-lg w-full justify-center relative">
       {answers?.map(answer => (
         <div
           key={answer.text}

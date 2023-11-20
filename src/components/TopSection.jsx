@@ -1,10 +1,14 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import PropTypes from "prop-types";
 
-const Counter = ({ stopCounter, resetCounter }) => {
+import { GameContext } from "../store/GameContextProvider";
+
+const TopSection = ({ stopCounter, resetCounter }) => {
+  const { isAdmin } = useContext(GameContext);
+
   const [counterNumber, setCounterNumber] = useState(5);
   const [intervalRef, setIntervalRef] = useState(null);
+
 
   useEffect(() => {
     if (stopCounter) {
@@ -34,15 +38,17 @@ const Counter = ({ stopCounter, resetCounter }) => {
 
   return (
     <div className="top h-2/4 relative">
-      <div className="timer w-20 h-20 rounded-full absolute top-5 left-20 font-semibold text-4xl border-4 grid place-items-center">
-        {counterNumber}
-      </div>
+      {!isAdmin && (
+        <div className="timer w-20 h-20 rounded-full absolute top-5 left-20 font-semibold text-4xl border-4 grid place-items-center">
+          {counterNumber}
+        </div>
+      )}
     </div>
   );
 };
-export default Counter;
+export default TopSection;
 
-Counter.propTypes = {
+TopSection.propTypes = {
   stopCounter: PropTypes.bool,
   resetCounter: PropTypes.bool,
 };
