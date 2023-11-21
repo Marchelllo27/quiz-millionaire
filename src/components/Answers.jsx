@@ -1,19 +1,28 @@
 import { useContext, useState } from "react";
 import PropTypes from "prop-types";
+import useSound from "use-sound";
 
+import correctSound from "../sounds/correct.mp3";
+import wrongSound from "../sounds/wrong.mp3";
+import waitingSound from "../sounds/wait.mp3";
 import { delay } from "../helpers/helpers";
 import { GameContext } from "../store/GameContextProvider";
 
-const Answers = ({ answers, setStopCounter, setQuestionNumber, setResetCounter }) => {
+const Answers = ({ answers, setStopCounter, setQuestionNumber, setResetCounter, stop, playWaitingMusic }) => {
   const { setShowModal } = useContext(GameContext);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [adjustedAnswerStyle, setAdjustedAnswerStyle] = useState("");
+  const [correctAnswerSound] = useSound(correctSound);
+  const [wrongAnswerSound] = useSound(wrongSound);
 
   const onClickHandler = answer => {
     setSelectedAnswer(answer);
     setStopCounter(true);
+    
     delay(() => {
       if (answer.correct) {
+        stop();
+        correctAnswerSound();
         setAdjustedAnswerStyle("from-[green] to-[green]");
         delay(() => {
           setQuestionNumber(prev => prev + 1);
@@ -21,8 +30,11 @@ const Answers = ({ answers, setStopCounter, setQuestionNumber, setResetCounter }
           setAdjustedAnswerStyle(null);
           setStopCounter(false);
           setResetCounter(true);
-        }, 2000);
+          playWaitingMusic();
+        }, 5000);
       } else {
+        stop();
+        wrongAnswerSound();
         setAdjustedAnswerStyle("from-[red] to-[red]");
         delay(() => {
           setShowModal();
@@ -58,4 +70,6 @@ Answers.propTypes = {
   setStopCounter: PropTypes.func.isRequired,
   setQuestionNumber: PropTypes.func.isRequired,
   setResetCounter: PropTypes.func.isRequired,
+  stop: PropTypes.func.isRequired,
+  playWaitingMusic: PropTypes.func.isRequired,
 };

@@ -1,12 +1,16 @@
 import { useContext } from "react";
 import PropTypes from "prop-types";
+import useSound from "use-sound";
 
 import { GameContext } from "../store/GameContextProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import startMusic from "../sounds/play.mp3";
+import { delay } from "../helpers/helpers";
 
-const UsernamePrompt = ({ setGameIsStarted }) => {
-  const { changeUsername, toggleIsAdmin, isAdmin } = useContext(GameContext);
+const UsernamePrompt = ({ setGameIsStarted, playWaitingMusic }) => {
+  const { changeUsername, toggleIsAdmin } = useContext(GameContext);
+  const [playStartMusic] = useSound(startMusic);
 
   const onSubmitHandler = e => {
     e.preventDefault();
@@ -18,8 +22,10 @@ const UsernamePrompt = ({ setGameIsStarted }) => {
     }
 
     if (value && value !== "") {
+      playStartMusic();
       changeUsername(value);
       setGameIsStarted(true);
+      delay(() => playWaitingMusic(), 5000);
     }
   };
 
@@ -42,4 +48,5 @@ export default UsernamePrompt;
 
 UsernamePrompt.propTypes = {
   setGameIsStarted: PropTypes.func.isRequired,
+  playWaitingMusic: PropTypes.func.isRequired,
 };
