@@ -4,32 +4,35 @@ import useSound from "use-sound";
 
 import correctSound from "../sounds/correct.mp3";
 import wrongSound from "../sounds/wrong.mp3";
-import waitingSound from "../sounds/wait.mp3";
 import { delay } from "../helpers/helpers";
 import { GameContext } from "../store/GameContextProvider";
 
-const Answers = ({ answers, setStopCounter, setQuestionNumber, setResetCounter, stop, playWaitingMusic }) => {
-  const { setShowModal } = useContext(GameContext);
+const Answers = ({ answers, setStopCounter, setResetCounter, stop, playWaitingMusic }) => {
+  const { setShowModal, setQuestionNumber } = useContext(GameContext);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [adjustedAnswerStyle, setAdjustedAnswerStyle] = useState("");
   const [correctAnswerSound] = useSound(correctSound);
   const [wrongAnswerSound] = useSound(wrongSound);
 
+  function resetAnswerData() {
+    setSelectedAnswer(null);
+    setAdjustedAnswerStyle(null);
+    setStopCounter(false);
+    setResetCounter(true);
+  }
+
   const onClickHandler = answer => {
     setSelectedAnswer(answer);
     setStopCounter(true);
-    
+
     delay(() => {
       if (answer.correct) {
         stop();
         correctAnswerSound();
         setAdjustedAnswerStyle("from-[green] to-[green]");
         delay(() => {
+          resetAnswerData();
           setQuestionNumber(prev => prev + 1);
-          setSelectedAnswer(null);
-          setAdjustedAnswerStyle(null);
-          setStopCounter(false);
-          setResetCounter(true);
           playWaitingMusic();
         }, 5000);
       } else {
@@ -38,6 +41,7 @@ const Answers = ({ answers, setStopCounter, setQuestionNumber, setResetCounter, 
         setAdjustedAnswerStyle("from-[red] to-[red]");
         delay(() => {
           setShowModal();
+          resetAnswerData();
         }, 3000);
       }
     }, 5000);
@@ -68,7 +72,6 @@ export default Answers;
 Answers.propTypes = {
   answers: PropTypes.arrayOf(PropTypes.shape({ text: PropTypes.string.isRequired, correct: PropTypes.bool })),
   setStopCounter: PropTypes.func.isRequired,
-  setQuestionNumber: PropTypes.func.isRequired,
   setResetCounter: PropTypes.func.isRequired,
   stop: PropTypes.func.isRequired,
   playWaitingMusic: PropTypes.func.isRequired,

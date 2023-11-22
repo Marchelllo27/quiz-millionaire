@@ -8,8 +8,8 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import startMusic from "../sounds/play.mp3";
 import { delay } from "../helpers/helpers";
 
-const UsernamePrompt = ({ setGameIsStarted, playWaitingMusic }) => {
-  const { changeUsername, toggleIsAdmin } = useContext(GameContext);
+const UsernamePrompt = ({ playWaitingMusic }) => {
+  const { changeUsername, toggleIsAdmin, setGameIsStarted } = useContext(GameContext);
   const [playStartMusic] = useSound(startMusic);
 
   const onSubmitHandler = e => {
@@ -32,7 +32,7 @@ const UsernamePrompt = ({ setGameIsStarted, playWaitingMusic }) => {
   return (
     <div className="wrapper w-full h-screen flex justify-center items-center">
       <form onSubmit={onSubmitHandler} className="flex flex-col">
-        <label htmlFor="username" className="text-6xl">
+        <label htmlFor="username" className="text-6xl 2xl:text-8xl">
           What is your name ?
         </label>
         <input type="text" name="username" id="username" className="my-10" minLength={2} autoComplete="off" required />
@@ -47,6 +47,5 @@ const UsernamePrompt = ({ setGameIsStarted, playWaitingMusic }) => {
 export default UsernamePrompt;
 
 UsernamePrompt.propTypes = {
-  setGameIsStarted: PropTypes.func.isRequired,
   playWaitingMusic: PropTypes.func.isRequired,
 };

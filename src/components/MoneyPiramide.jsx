@@ -1,4 +1,3 @@
-
 import PropTypes from "prop-types";
 
 const moneyPyramid = [
@@ -22,8 +21,8 @@ const moneyPyramid = [
 import { useContext } from "react";
 import { GameContext } from "../store/GameContextProvider";
 
-const MoneyPiramide = ({ questionNumber }) => {
-  const { isAdmin, username } = useContext(GameContext);
+const MoneyPiramide = () => {
+  const { isAdmin, username, questionNumber } = useContext(GameContext);
 
   const name = isAdmin ? "Admin" : username;
 
@@ -42,7 +41,3 @@ const MoneyPiramide = ({ questionNumber }) => {
   );
 };
 export default MoneyPiramide;
-
-MoneyPiramide.propTypes = {
-  questionNumber: PropTypes.number.isRequired,
-};

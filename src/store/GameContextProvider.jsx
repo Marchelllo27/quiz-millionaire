@@ -6,6 +6,8 @@ export const GameContext = createContext({
   username: "",
   gameIsStarted: false,
   showModal: false,
+  questionNumber: 1,
+  setQuestionNumber: () => {},
   setShowModal: () => {},
   changeUsername: () => {},
   toggleIsAdmin: () => {},
@@ -17,15 +19,19 @@ const GameContextProvider = ({ children }) => {
   const [gameIsStarted, setGameIsStarted] = useState(false);
   const [username, setUsername] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [questionNumber, setQuestionNumber] = useState(1);
 
   const GameContextValue = {
-    isAdmin: isAdmin,
-    gameIsStarted: gameIsStarted,
-    username: username,
-    showModal: showModal,
-    setShowModal: () => setShowModal(!showModal),
+    isAdmin,
+    gameIsStarted,
+    username,
+    showModal,
+    questionNumber,
+    setQuestionNumber: () => setQuestionNumber(prev => prev + 1),
+    setGameIsStarted: () => setGameIsStarted(prev => !prev),
+    setShowModal: () => setShowModal(prev => !prev),
     changeUsername: name => setUsername(name),
-    toggleIsAdmin: () => setIsAdmin(!isAdmin),
+    toggleIsAdmin: () => setIsAdmin(prev => !prev),
     toggleGameIsStarted: () => setGameIsStarted(!gameIsStarted),
   };
 
