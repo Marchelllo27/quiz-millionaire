@@ -19,10 +19,9 @@ const GameSection = () => {
   const [resetCounter, setResetCounter] = useState(null);
 
   useEffect(() => {
-    setQuestion(data[questionNumber - 1]);
+    // setQuestion(data[questionNumber - 1]);
+    setQuestion(data[14]);
   }, [questionNumber]);
-
-  
 
   return (
     <section className="w-3/4 bg-hero-pattern bg-center bg-cover text-white relative">
@@ -38,6 +37,7 @@ const GameSection = () => {
 
           <Answers
             answers={question?.answers}
+            isLastQuestion={question?.isLastQuestion}
             setStopCounter={setStopCounter}
             setResetCounter={setResetCounter}
             stop={stop}

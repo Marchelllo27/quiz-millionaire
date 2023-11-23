@@ -112,6 +112,7 @@ export default [
   {
     id: 15,
     question: "Яке ім'я дав фараон Йосипові?? (Буття 41:45)",
+    isLastQuestion: true,
     answers: [
       { text: "Цофнат-Панеах", correct: true },
       { text: "Фатмут-Панеух" },
