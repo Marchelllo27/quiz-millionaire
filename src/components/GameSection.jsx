@@ -27,7 +27,7 @@ const GameSection = () => {
       {!gameIsStarted && <UsernamePrompt playWaitingMusic={playWaitingMusic} />}
       {gameIsStarted && <TopSection stopCounter={stopCounter} resetCounter={resetCounter} />}
       {gameIsStarted && (
-        <div className="bottom h-2/4 px-20 flex flex-col items-center justify-center text-center">
+        <div className="bottom h-2/4 max-w-6xl m-auto px-20 flex flex-col items-center justify-center text-center">
           <Question question={question?.question} />
 
           <Answers
