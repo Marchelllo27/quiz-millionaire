@@ -31,6 +31,7 @@ const Answers = ({ answers, setStopCounter, setResetCounter, stop, playWaitingMu
         stop();
         answer.correct ? correctAnswerSound() : wrongAnswerSound();
         setShowEndGameModal(true);
+        return;
       }
 
       if (answer.correct) {
