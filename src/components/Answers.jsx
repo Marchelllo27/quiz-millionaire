@@ -74,7 +74,7 @@ const Answers = ({ answers, setStopCounter, setResetCounter, stop, playWaitingMu
       {answers?.map(answer => (
         <div
           key={answer.text}
-          className={`w-[49%] border-[1px] rounded-xl grid items-center p-4 mb-5 text-xl bg-gradient-to-b from-[#0e0124] to-[#22074d] hover:from-[blue] hover:to-[blue] cursor-pointer ${
+          className={`w-[49%] border-[1px] rounded-xl grid items-center p-4 mb-5 text-4xl bg-gradient-to-b from-[#0e0124] to-[#22074d] hover:from-[blue] hover:to-[blue] cursor-pointer ${
             selectedAnswer && answer.text === selectedAnswer.text
               ? `pointer-events-none animate-bounce ${adjustedAnswerStyle}`
               : selectedAnswer && answer.text !== selectedAnswer.text
