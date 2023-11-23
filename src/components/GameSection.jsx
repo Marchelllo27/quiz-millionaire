@@ -19,8 +19,7 @@ const GameSection = () => {
   const [resetCounter, setResetCounter] = useState(null);
 
   useEffect(() => {
-    // setQuestion(data[questionNumber - 1]);
-    setQuestion(data[14]);
+    setQuestion(data[questionNumber - 1]);
   }, [questionNumber]);
 
   return (
