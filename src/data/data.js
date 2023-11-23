@@ -1,32 +1,122 @@
 export default [
   {
     id: 1,
-    question: "What is Javascript?",
-    answers: [
-      { text: "Very popular programming language", correct: true },
-      { text: "Name of a restaurant" },
-      { text: "It is a weapon against fighter jet F-16" },
-      { text: "It is an old scripture from The Bible" },
-    ],
+    question: "Що є гниллю для кісток? (Пр 14:30)",
+    answers: [{ text: "Гнів" }, { text: "Гордість" }, { text: "Заздрість", correct: true }, { text: "Байдужість" }],
   },
   {
     id: 2,
-    question: "What is CSS?",
-    answers: [
-      { text: "New version of Counter Strike" },
-      { text: "It is a joke" },
-      { text: "Cascading Style Sheet", correct: true },
-      { text: "File extension" },
-    ],
+    question: "Як звали вродливу жінку, яка врятувала свій ізраїльський народ?",
+    answers: [{ text: "Раав" }, { text: "Естер", correct: true }, { text: "Ревекка" }, { text: "Альона" }],
   },
   {
     id: 3,
-    question: "What is React?",
+    question: "Ким Мордехай був Естер?",
     answers: [
-      { text: "Technology developed by NASA" },
-      { text: "Powerful Javascript library", correct: true },
-      { text: "Nuclear weapon" },
-      { text: "Name of the rocket" },
+      { text: "Кум" },
+      { text: "Двоюрідний брат", correct: true },
+      { text: "Рідний брат" },
+      { text: "Людина яка хотіла вбити Естер" },
+    ],
+  },
+  {
+    id: 4,
+    question: "Яке друге ім'я Естер? (Естер 2:7)",
+    answers: [{ text: "Хеттура" }, { text: "Зілпа" }, { text: "Ціппора" }, { text: "Гадасса", correct: true }],
+  },
+  {
+    id: 5,
+    question: "Яка жінка була вдовою три години?",
+    answers: [{ text: "Вірсавія" }, { text: "Суламіта" }, { text: "Ноемінь" }, { text: "Сапфіра", correct: true }],
+  },
+  {
+    id: 6,
+    question: "Збираючий під час літа - син розумний, а сплячий під час жнив -........... (Пр 10:5)",
+    answers: [
+      { text: "Син бездарний" },
+      { text: "Син безпутній", correct: true },
+      { text: "Син який ганьбить батьків" },
+      { text: "Син безглуздий" },
+    ],
+  },
+  {
+    id: 7,
+    question: "Яких комах знайшов Самсон у трупі лева? (Суд 14:8)",
+    answers: [{ text: "Сарана" }, { text: "Комарі" }, { text: "Мухи" }, { text: "Бджоли", correct: true }],
+  },
+  {
+    id: 8,
+    question: "Як звали матір і бабусю Якова??",
+    answers: [
+      { text: "Лія і Сара" },
+      { text: "Лія і Рахиль" },
+      { text: "Ревекка і Сара", correct: true },
+      { text: "Ревекка і Рахиль" },
+    ],
+  },
+  {
+    id: 9,
+    question: "В чому звинувачував Бога Йона? ",
+    answers: [
+      { text: "В милості", correct: true },
+      { text: "В тому що він був задовго в рибі, можна було і менше" },
+      { text: "В тому що забрав тінь в нього над головою" },
+      { text: "В тому що не післав йому води коли він хотів пити" },
+    ],
+  },
+  {
+    id: 10,
+    question: "Яка дика тварина зустрічається в Біблії найчастіше?",
+    answers: [{ text: "Голуб" }, { text: "Віслюк" }, { text: "Вівця" }, { text: "Лев", correct: true }],
+  },
+  {
+    id: 11,
+    question: "Що робить той, хто вмішується в чужу сварку згідно притчам Соломона? (Пр 26:17)",
+    answers: [
+      { text: "Кладе руку до лева в пащу" },
+      { text: "Хапає пса за вуха", correct: true },
+      { text: "Дьоргає кота за хвіст" },
+      { text: "Ризикує виявиявитись винним" },
+    ],
+  },
+  {
+    id: 12,
+    question: "З якого дерева Ной зробив ковчег? (Бут 6:14)",
+    answers: [
+      { text: "Дуб ліваньский" },
+      { text: "Кедр" },
+      { text: "Гофер", correct: true },
+      { text: "Сосна алепська" },
+    ],
+  },
+  {
+    id: 13,
+    question: "Як Ісус уздоровив тещу Петра? (Матв 8:15)",
+    answers: [
+      { text: "Закрив двері в кімнаті і молився на колінах" },
+      { text: "Попросив Отця зцілити її" },
+      { text: "Просто сказав щоб була зцілена" },
+      { text: "Торкнувся її руки", correct: true },
+    ],
+  },
+  {
+    id: 14,
+    question: "Хто помер через танці? (Мтв. 14:6-10)",
+    answers: [
+      { text: "Жінка Давида" },
+      { text: "Іван Хреститель", correct: true },
+      { text: "Самсон" },
+      { text: "Ті хто несли ковчег заповіту" },
+    ],
+  },
+  {
+    id: 15,
+    question: "Яке ім'я дав фараон Йосипові?? (Буття 41:45)",
+    answers: [
+      { text: "Цофнат-Панеах", correct: true },
+      { text: "Фатмут-Панеух" },
+      { text: "Натлум-Чифирун" },
+      { text: "Харнаф-Шатриат" },
     ],
   },
 ];

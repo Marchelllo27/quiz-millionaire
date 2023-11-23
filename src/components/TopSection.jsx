@@ -9,7 +9,6 @@ const TopSection = ({ stopCounter, resetCounter }) => {
   const [counterNumber, setCounterNumber] = useState(5);
   const [intervalRef, setIntervalRef] = useState(null);
 
-
   useEffect(() => {
     if (stopCounter) {
       return clearInterval(intervalRef);
@@ -36,13 +35,13 @@ const TopSection = ({ stopCounter, resetCounter }) => {
     return () => clearInterval(interval);
   }, [resetCounter]);
 
+  if (isAdmin) return null;
+
   return (
     <div className="top h-2/4 relative">
-      {!isAdmin && (
-        <div className="timer w-20 h-20 rounded-full absolute top-5 left-20 font-semibold text-4xl border-4 grid place-items-center">
-          {counterNumber}
-        </div>
-      )}
+      <div className="timer w-20 h-20 rounded-full absolute top-5 left-20 font-semibold text-4xl border-4 grid place-items-center">
+        {counterNumber}
+      </div>
     </div>
   );
 };

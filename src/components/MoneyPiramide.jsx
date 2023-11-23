@@ -29,11 +29,11 @@ const MoneyPiramide = () => {
   return (
     <aside className="w-1/4 bg-main-blue text-white flex justify-center items-center">
       {name && <p className="absolute top-4">{name}</p>}
-      <ul className="w-full p-6">
+      <ul className="w-full p-6 flex flex-col 2xl:gap-3">
         {moneyPyramid.map(item => (
-          <li key={item.id} className={`flex p-0.5 rounded ${questionNumber === item.id ? "bg-[#008080]" : ""}`}>
-            <span className="text-lg font-thin w-2/5">{item.id}</span>
-            <span className="text-xl font-light">$ {item.amount}</span>
+          <li key={item.id} className={`flex p-0.5 rounded ${questionNumber === item.id && "bg-[#008080]"}`}>
+            <span className="text-lg 2xl:text-2xl font-thin w-2/5">{item.id}</span>
+            <span className="text-xl 2xl:text-2xl font-light">$ {item.amount}</span>
           </li>
         ))}
       </ul>

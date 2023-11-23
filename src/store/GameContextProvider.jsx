@@ -7,6 +7,8 @@ export const GameContext = createContext({
   gameIsStarted: false,
   showModal: false,
   questionNumber: 1,
+  waitingMusic: {},
+  setWaitingMusic: () => {},
   setQuestionNumber: () => {},
   setShowModal: () => {},
   changeUsername: () => {},
@@ -20,6 +22,7 @@ const GameContextProvider = ({ children }) => {
   const [username, setUsername] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [questionNumber, setQuestionNumber] = useState(1);
+  const [waitingMusic, setWaitingMusic] = useState({});
 
   const GameContextValue = {
     isAdmin,
@@ -27,6 +30,8 @@ const GameContextProvider = ({ children }) => {
     username,
     showModal,
     questionNumber,
+    waitingMusic,
+    setStartWaitingMusic: music => setWaitingMusic(music),
     setQuestionNumber: () => setQuestionNumber(prev => prev + 1),
     setGameIsStarted: () => setGameIsStarted(prev => !prev),
     setShowModal: () => setShowModal(prev => !prev),

@@ -11,7 +11,7 @@ import waitMusic from "../sounds/wait.mp3";
 import { GameContext } from "../store/GameContextProvider";
 
 const GameSection = () => {
-  const { showModal, gameIsStarted, questionNumber, setQuestionNumber } = useContext(GameContext);
+  const { showModal, gameIsStarted, questionNumber, setQuestionNumber, isAdmin } = useContext(GameContext);
   const [playWaitingMusic, { stop }] = useSound(waitMusic);
 
   const [question, setQuestion] = useState(null);
@@ -22,12 +22,18 @@ const GameSection = () => {
     setQuestion(data[questionNumber - 1]);
   }, [questionNumber]);
 
+  
+
   return (
     <section className="w-3/4 bg-hero-pattern bg-center bg-cover text-white relative">
       {!gameIsStarted && <UsernamePrompt playWaitingMusic={playWaitingMusic} />}
       {gameIsStarted && <TopSection stopCounter={stopCounter} resetCounter={resetCounter} />}
       {gameIsStarted && (
-        <div className="bottom h-2/4 max-w-6xl m-auto px-20 flex flex-col items-center justify-center text-center">
+        <div
+          className={`bottom h-2/4 ${
+            isAdmin && "h-screen"
+          } max-w-7xl m-auto px-20 flex flex-col items-center justify-center text-center`}
+        >
           <Question question={question?.question} />
 
           <Answers
@@ -40,7 +46,11 @@ const GameSection = () => {
         </div>
       )}
       {showModal && (
-        <Modal setQuestionNumber={setQuestionNumber} title="УУУУПС, трошки не те...">
+        <Modal
+          setQuestionNumber={setQuestionNumber}
+          title="УУУУПС, трошки не те..."
+          playWaitingMusic={playWaitingMusic}
+        >
           Але з ким не буває? Продовжуємо йти до перемоги!
         </Modal>
       )}

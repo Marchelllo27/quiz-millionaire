@@ -5,12 +5,9 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 import Button from "./shared/Button";
 import { GameContext } from "../store/GameContextProvider";
-import useSound from "use-sound";
-import waitingMusic from "../sounds/wait.mp3";
 
-const Modal = ({ title, children, setQuestionNumber }) => {
+const Modal = ({ title, children, setQuestionNumber, playWaitingMusic }) => {
   const { isAdmin, setShowModal } = useContext(GameContext);
-  const [playWaitingMusic] = useSound(waitingMusic);
 
   const nextQuestionHandler = () => {
     setQuestionNumber(prev => prev + 1);
@@ -42,4 +39,5 @@ Modal.propTypes = {
   title: PropTypes.string.isRequired,
   children: PropTypes.node,
   setQuestionNumber: PropTypes.func,
+  playWaitingMusic: PropTypes.func,
 };
