@@ -23,7 +23,7 @@ const GameSection = () => {
   }, [questionNumber]);
 
   return (
-    <section className="w-3/4 bg-hero-pattern bg-center bg-cover text-white relative">
+    <section className="hidden sm:block w-3/4 bg-hero-pattern bg-center bg-cover text-white relative">
       {!gameIsStarted && <UsernamePrompt playWaitingMusic={playWaitingMusic} />}
       {gameIsStarted && <TopSection stopCounter={stopCounter} resetCounter={resetCounter} />}
       {gameIsStarted && (

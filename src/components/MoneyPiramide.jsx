@@ -27,7 +27,7 @@ const MoneyPiramide = () => {
   const name = isAdmin ? "Admin" : username;
 
   return (
-    <aside className="w-1/4 bg-main-blue text-white flex justify-center items-center">
+    <aside className="hidden sm:flex justify-center items-center w-1/4 bg-main-blue text-white ">
       {name && <p className="absolute top-4">{name}</p>}
       <ul className="w-full p-6 flex flex-col 2xl:gap-3">
         {moneyPyramid.map(item => (
