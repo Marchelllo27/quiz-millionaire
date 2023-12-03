@@ -1,10 +1,16 @@
+import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 
 const Question = ({ question }) => {
   return (
-    <h2 className="question mb-20 text-2xl 2xl:text-6xl border-2 rounded-md w-full py-4 bg-gradient-to-b from-[#100241] to-[black]">
+    <motion.h2
+      initial={{ opacity: 0, y: -100 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.5, duration: 1.1 }}
+      className="question mb-20 text-4xl 2xl:text-6xl border-2 rounded-md w-full py-4 bg-gradient-to-b from-[#100241] to-[black]"
+    >
       {question && question}
-    </h2>
+    </motion.h2>
   );
 };
 export default Question;

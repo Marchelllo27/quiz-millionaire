@@ -1,18 +1,21 @@
-import { useContext } from "react";
+import { useContext, useTransition } from "react";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 import Button from "./shared/Button";
 import { GameContext } from "../store/GameContextProvider";
+import { MusicContext } from "../store/MusicContextProvider";
 
-const Modal = ({ title, children, setQuestionNumber, playWaitingMusic }) => {
-  const { isAdmin, setShowModal } = useContext(GameContext);
+const Modal = ({ title, children }) => {
+  const { isAdmin, toggleShowModal, setNextQuestionNumber } = useContext(GameContext);
+  const { playWaitingTrack } = useContext(MusicContext);
+  const [isPending, startTransition] = useTransition();
 
   const nextQuestionHandler = () => {
-    setQuestionNumber(prev => prev + 1);
-    playWaitingMusic();
-    setShowModal();
+    setNextQuestionNumber();
+    startTransition(() => playWaitingTrack());
+    startTransition(() => toggleShowModal());
   };
 
   return (
@@ -38,6 +41,4 @@ export default Modal;
 Modal.propTypes = {
   title: PropTypes.string.isRequired,
   children: PropTypes.node,
-  setQuestionNumber: PropTypes.func,
-  playWaitingMusic: PropTypes.func,
 };

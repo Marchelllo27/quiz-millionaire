@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+import { motion } from "framer-motion";
 
 const moneyPyramid = [
   { id: 1, amount: "100" },
@@ -27,15 +27,25 @@ const MoneyPiramide = () => {
   const name = isAdmin ? "Admin" : username;
 
   return (
-    <aside className="hidden sm:flex justify-center items-center w-1/4 bg-main-blue text-white ">
+    <aside className="hidden sm:flex justify-center items-center w-1/4 bg-main-blue text-white overflow-hidden">
       {name && <p className="absolute top-4">{name}</p>}
       <ul className="w-full p-6 flex flex-col 2xl:gap-3">
-        {moneyPyramid.map(item => (
-          <li key={item.id} className={`flex p-0.5 rounded ${questionNumber === item.id && "bg-[#008080]"}`}>
-            <span className="text-lg 2xl:text-2xl font-thin w-2/5">{item.id}</span>
-            <span className="text-xl 2xl:text-2xl font-light">$ {item.amount}</span>
-          </li>
-        ))}
+        {moneyPyramid.map(item => {
+          const firstItemDuration = 10;
+          const delayDuration = (+(item.id + "00") + firstItemDuration) / 1000;
+          return (
+            <motion.li
+              initial={{ x: "110%" }}
+              animate={{ x: 0 }}
+              transition={{ delay: delayDuration, bounce: 0, duration: 0.1 }}
+              key={item.id}
+              className={`flex p-0.5 rounded ${questionNumber === item.id && "bg-[#008080]"}`}
+            >
+              <span className="text-lg 2xl:text-2xl font-thin w-2/5">{item.id}</span>
+              <span className="text-xl 2xl:text-2xl font-light">$ {item.amount}</span>
+            </motion.li>
+          );
+        })}
       </ul>
     </aside>
   );

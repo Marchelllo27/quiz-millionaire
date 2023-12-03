@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import useSound from "use-sound";
 
 import data from "../data/data";
 import TopSection from "./TopSection";
@@ -7,14 +6,11 @@ import Question from "./Question";
 import Answers from "./Answers";
 import UsernamePrompt from "./UsernamePrompt";
 import Modal from "./Modal";
-import waitMusic from "../sounds/wait.mp3";
 import { GameContext } from "../store/GameContextProvider";
 
 const GameSection = () => {
-  const { showModal, gameIsStarted, questionNumber, setQuestionNumber, isAdmin } = useContext(GameContext);
-  const [playWaitingMusic, { stop }] = useSound(waitMusic);
-
-  const [question, setQuestion] = useState(null);
+  const { showModal, gameIsStarted, questionNumber, isAdmin } = useContext(GameContext);
+  const [question, setQuestion] = useState([]);
   const [stopCounter, setStopCounter] = useState(null);
   const [resetCounter, setResetCounter] = useState(null);
 
@@ -24,7 +20,7 @@ const GameSection = () => {
 
   return (
     <section className="hidden sm:block w-3/4 bg-hero-pattern bg-center bg-cover text-white relative">
-      {!gameIsStarted && <UsernamePrompt playWaitingMusic={playWaitingMusic} />}
+      {!gameIsStarted && <UsernamePrompt />}
       {gameIsStarted && <TopSection stopCounter={stopCounter} resetCounter={resetCounter} />}
       {gameIsStarted && (
         <div
@@ -39,20 +35,10 @@ const GameSection = () => {
             isLastQuestion={question?.isLastQuestion}
             setStopCounter={setStopCounter}
             setResetCounter={setResetCounter}
-            stop={stop}
-            playWaitingMusic={playWaitingMusic}
           />
         </div>
       )}
-      {showModal && (
-        <Modal
-          setQuestionNumber={setQuestionNumber}
-          title="УУУУПС, трошки не те..."
-          playWaitingMusic={playWaitingMusic}
-        >
-          Але з ким не буває? Продовжуємо йти до перемоги!
-        </Modal>
-      )}
+      {showModal && <Modal title="УУУУПС, трошки не те...">Але з ким не буває? Продовжуємо йти до перемоги!</Modal>}
     </section>
   );
 };
