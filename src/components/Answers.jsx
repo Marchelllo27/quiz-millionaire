@@ -30,8 +30,6 @@ const Answers = ({ answers, setStopCounter, setResetCounter, isLastQuestion }) =
   useEffect(() => {
     myDelayRef.current = delay(playWaitingTrack, 2800);
 
-    console.log("WAITING MUSIC TRIGGERED");
-
     return () => clearTimeout(myDelayRef.current);
   }, [playWaitingTrack]);
 
@@ -48,8 +46,8 @@ const Answers = ({ answers, setStopCounter, setResetCounter, isLastQuestion }) =
     stopWaitingTrack();
     setSelectedAnswer(answer);
     setStopCounter(true);
-
     playPickedAnswerTrack();
+    setAdjustedAnswerStyle("from-[#fed7aa] to-[#fed7aa]");
 
     delay(() => {
       stopPickedAnswerTrack();
@@ -82,10 +80,10 @@ const Answers = ({ answers, setStopCounter, setResetCounter, isLastQuestion }) =
       if (!answer.correct) {
         playWrongAnswerTrack();
         setAdjustedAnswerStyle("from-[red] to-[red]");
-        delay(() => {
-          toggleShowModal();
-          resetAnswerData();
-        }, 3000);
+        // delay(() => {
+        //   toggleShowModal();
+        //   resetAnswerData();
+        // }, 3000);
       }
     }, 5000);
   };
@@ -112,29 +110,32 @@ const Answers = ({ answers, setStopCounter, setResetCounter, isLastQuestion }) =
         const answerId = id.current;
         id.current += 1;
 
-        // STYLES RELATED VARIABLES
         const fromLeftAnimation = answerId === 1 || answerId === 3 ? true : false;
-        const correctAnswerStyle =
-          selectedAnswer &&
-          answer.text === selectedAnswer.text &&
-          `pointer-events-none animate-bounce ${adjustedAnswerStyle}`;
-        const wrongAnswerStyle =
-          selectedAnswer && answer.text !== selectedAnswer.text ? "opacity-20 pointer-events-none" : "";
+        const currentlySelectedAnswer = selectedAnswer && selectedAnswer.text === answer.text;
+        const notSelectedAnswer = selectedAnswer && selectedAnswer.text !== answer.text;
 
         return (
-          <motion.div
+          <motion.button
             key={answer.text}
             id={answerId}
             initial={{ x: fromLeftAnimation ? -40 : 40, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.5, duration: 1.1 }}
-            className={`w-[49%] border-[1px] rounded-xl grid items-center p-4 mb-5 text-3xl bg-gradient-to-b from-[#0e0124] to-[#22074d] hover:from-[blue] hover:to-[blue] cursor-pointer
-            ${correctAnswerStyle} ${wrongAnswerStyle}
+            className={`w-[49%] border-[1px] rounded-xl grid items-center p-4 mb-5 text-3xl bg-gradient-to-b from-[#0e0124] to-[#22074d] hover:from-secondary hover:to-secondary cursor-pointer
+            
+            ${
+              currentlySelectedAnswer
+                ? `animate-bounce ${adjustedAnswerStyle} pointer-events-none `
+                : notSelectedAnswer
+                ? "!opacity-30 disabled:pointer-events-none"
+                : ""
+            }
             `}
             onClick={onClickHandler.bind(null, answer)}
+            disabled={notSelectedAnswer}
           >
             {answer.text}
-          </motion.div>
+          </motion.button>
         );
       })}
     </div>

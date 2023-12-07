@@ -39,7 +39,7 @@ const MoneyPiramide = () => {
               animate={{ x: 0 }}
               transition={{ delay: delayDuration, bounce: 0, duration: 0.1 }}
               key={item.id}
-              className={`flex p-0.5 rounded ${questionNumber === item.id && "bg-[#008080]"}`}
+              className={`flex p-0.5 rounded ${questionNumber === item.id && "bg-secondary"}`}
             >
               <span className="text-lg 2xl:text-2xl font-thin w-2/5">{item.id}</span>
               <span className="text-xl 2xl:text-2xl font-light">$ {item.amount}</span>

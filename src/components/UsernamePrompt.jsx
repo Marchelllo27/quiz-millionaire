@@ -54,7 +54,7 @@ const UsernamePrompt = () => {
           autoFocus
           required
         />
-        <button className="bg-[#008080] border-none py-4 px-12 w-fit m-auto rounded-lg flex hover:scale-110 transition-all hover:-translate-y-2">
+        <button className="bg-secondary border-none py-4 px-12 w-fit m-auto rounded-lg flex hover:scale-110 transition-all hover:-translate-y-2">
           <span className="mr-3 text-xl">Confirm</span>
           <FontAwesomeIcon icon={faCheck} size="xl" />
         </button>
