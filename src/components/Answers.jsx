@@ -80,10 +80,10 @@ const Answers = ({ answers, setStopCounter, setResetCounter, isLastQuestion }) =
       if (!answer.correct) {
         playWrongAnswerTrack();
         setAdjustedAnswerStyle("from-[red] to-[red]");
-        // delay(() => {
-        //   toggleShowModal();
-        //   resetAnswerData();
-        // }, 3000);
+        delay(() => {
+          toggleShowModal();
+          resetAnswerData();
+        }, 3000);
       }
     }, 5000);
   };
