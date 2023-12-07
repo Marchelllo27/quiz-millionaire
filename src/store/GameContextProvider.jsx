@@ -21,7 +21,7 @@ const GameContextProvider = ({ children }) => {
   const [gameIsStarted, setGameIsStarted] = useState(false);
   const [username, setUsername] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [questionNumber, setQuestionNumber] = useState(1);
+  const [questionNumber, setQuestionNumber] = useState(15);
   const [waitingMusic, setWaitingMusic] = useState({});
 
   const GameContextValue = {

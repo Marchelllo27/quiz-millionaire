@@ -5,11 +5,13 @@ import { motion } from "framer-motion";
 import { delay } from "../helpers/helpers";
 import { GameContext } from "../store/GameContextProvider";
 import { MusicContext } from "../store/MusicContextProvider";
+import ConfettiComponent from "./Confetti";
 
 const Answers = ({ answers, setStopCounter, setResetCounter, isLastQuestion }) => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showEndGameModal, setShowEndGameModal] = useState(false);
   const [adjustedAnswerStyle, setAdjustedAnswerStyle] = useState("");
+  const [showConfetti, setShowConfetti] = useState(false);
 
   const { toggleShowModal, setNextQuestionNumber } = useContext(GameContext);
   const {
@@ -20,12 +22,15 @@ const Answers = ({ answers, setStopCounter, setResetCounter, isLastQuestion }) =
     stopPickedAnswerTrack,
     playCorrectAnswerTrack,
     playWrongAnswerTrack,
+    playWelcomeTrack,
   } = useContext(MusicContext);
 
   let myDelayRef = useRef(null);
 
   useEffect(() => {
     myDelayRef.current = delay(playWaitingTrack, 2800);
+
+    console.log("WAITING MUSIC TRIGGERED");
 
     return () => clearTimeout(myDelayRef.current);
   }, [playWaitingTrack]);
@@ -52,6 +57,8 @@ const Answers = ({ answers, setStopCounter, setResetCounter, isLastQuestion }) =
       if (isLastQuestion && answer.correct) {
         playCorrectAnswerTrack();
         setShowEndGameModal(true);
+        setShowConfetti(true);
+        delay(playWelcomeTrack, 3000);
         return;
       }
 
@@ -94,6 +101,7 @@ const Answers = ({ answers, setStopCounter, setResetCounter, isLastQuestion }) =
           <h2 className="text-5xl">Ви молодці, дякую за гру!</h2>
           <p className="text-5xl">А гроші то не головне! 😅 💰</p>
         </div>
+        {showConfetti && <ConfettiComponent />}
       </div>
     );
   }
@@ -112,13 +120,6 @@ const Answers = ({ answers, setStopCounter, setResetCounter, isLastQuestion }) =
           `pointer-events-none animate-bounce ${adjustedAnswerStyle}`;
         const wrongAnswerStyle =
           selectedAnswer && answer.text !== selectedAnswer.text ? "opacity-20 pointer-events-none" : "";
-
-        // const answerStyle =
-        //   selectedAnswer && answer.text === selectedAnswer.text
-        //     ? `pointer-events-none animate-bounce ${adjustedAnswerStyle}`
-        //     : selectedAnswer && answer.text !== selectedAnswer.text
-        //     ? "opacity-20 pointer-events-none"
-        //     : "";
 
         return (
           <motion.div
